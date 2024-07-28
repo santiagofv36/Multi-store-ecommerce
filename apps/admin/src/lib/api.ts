@@ -117,9 +117,3 @@ export const axios = Axios.create({
   },
 });
 
-export const axiosS3 = Axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
-  headers: {
-    'x-amz-acl': 'public-read',
-  },
-});
