@@ -1,0 +1,19 @@
+{
+  "name": "next-nest-template",
+  "version": "1.0.0",
+  "description": "This is a template for Next.js and Nest.js project",
+  "scripts": {
+    "dev": "pnpm --parallel packages:build && pnpm --parallel dev",
+    "build": "pnpm --parallel build",
+    "lint": "pnpm --parallel lint",
+    "start": "pnpm --parallel start",
+    "packages:build": "pnpm --parallel packages:build"
+  },
+  "keywords": [],
+  "author": "Santiago Figueroa",
+  "license": "MIT",
+  "workspaces":[
+    "apps/*",
+    "packages/*"
+  ]
+}
