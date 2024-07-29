@@ -5,6 +5,12 @@ import { Document, Types } from 'mongoose';
 import { Address, AddressSchema } from '../../address/schema/address.model';
 import { zodToClass } from '../../../lib/zod-to-schema';
 import { Type, Exclude } from 'class-transformer';
+import { sessionDefinition } from '@packages/models';
+
+@Schema({
+  timestamps: true,
+})
+export class ActiveSession extends zodToClass(sessionDefinition) {}
 
 @Schema({
   timestamps: true,
@@ -12,9 +18,6 @@ import { Type, Exclude } from 'class-transformer';
 export class User extends zodToClass(createUserInput) {
   @Exclude()
   password: string;
-  @Prop({ type: Types.ObjectId, ref: Address.name })
-  @Type(() => Address)
-  address: Address;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

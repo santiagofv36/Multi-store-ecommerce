@@ -8,7 +8,7 @@ export const basicDefinition = z.object({
 });
 
 export const basicModelDefinition = basicDefinition.extend({
-  active: z.boolean().default(true),
+  active: z.boolean().default(true).optional(),
 });
 
 export const paginateParams = z.object({
@@ -30,6 +30,9 @@ export type Pagination<Model> = {
   };
 };
 
-export const objectIdString = z.string().refine((val) => Types.ObjectId.isValid(val), {
-  message: 'Invalid ObjectId',
-}).transform((val) => new Types.ObjectId(val));
+export const objectIdString = z
+  .string()
+  .refine((val) => Types.ObjectId.isValid(val), {
+    message: 'Invalid ObjectId',
+  })
+  .transform((val) => new Types.ObjectId(val));

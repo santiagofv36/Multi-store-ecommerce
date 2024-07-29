@@ -1,20 +1,30 @@
-import { Body, Controller, Post, UsePipes, Get } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  UsePipes,
+  Get,
+  UseGuards,
+  Req,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ZodValidationPipe } from 'src/core/pipes/zodValidation.pipe';
-import { userDefinition, TCreateUserInput } from '@packages/models';
+import { TLoginInput, loginInput } from '@packages/models';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  // @Post()
-  // @UsePipes(new ZodValidationPipe(userDefinition))
-  // create(@Body() body: TCreateUserInput) {
-  //   return this.authService.signUp(body);
-  // }
+  @Post()
+  @UsePipes(new ZodValidationPipe(loginInput))
+  login(@Body() body: TLoginInput) {
+    return this.authService.login(body);
+  }
 
-  // @Get()
-  // getUsers() {
-  //   return this.authService.getUsers();
-  // }
+  @Get('me')
+  @UseGuards(AuthGuard('jwt'))
+  async currentUser(@Req() req: any): Promise<any> {
+    return req.user;
+  }
 }
