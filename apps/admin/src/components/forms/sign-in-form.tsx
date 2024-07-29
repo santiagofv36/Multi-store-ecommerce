@@ -29,7 +29,7 @@ export default function SignInForm() {
 
       if (res?.ok) {
         // TODO: Redirect to the dashboard & show a success message
-        router.replace('/');
+        router.replace('/dashboard');
       }
 
       if (res?.status === 401) {

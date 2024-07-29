@@ -8,7 +8,7 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   pages: {
-    signIn: '/sign-in', // TODO: Add the path to your sign in page
+    signIn: '/sign-in',
   },
   providers: [
     CredentialsProvider({
