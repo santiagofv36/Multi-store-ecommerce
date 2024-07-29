@@ -1,12 +1,14 @@
+import axios from 'axios';
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { IUser } from '@packages/models';
 
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
   pages: {
-    signIn: '', // TODO: Add the path to your sign in page
+    signIn: '/sign-in', // TODO: Add the path to your sign in page
   },
   providers: [
     CredentialsProvider({
@@ -15,9 +17,29 @@ export const authOptions: NextAuthOptions = {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials) {
+      async authorize(credentials): Promise<any> {
         try {
           // Call backend and set the token in local storage
+
+          if (credentials?.email && credentials?.password) {
+            const response = await axios.post<IUser>(
+              `${process.env.NEXT_PUBLIC_API_URL}/auth/`,
+              {
+                email: credentials.email,
+                password: credentials.password,
+              }
+            );
+
+            const { data } = response;
+
+            if (data) {
+              if (typeof window !== 'undefined') {
+                localStorage.setItem('token', data.activeSession!.token);
+              }
+
+              return data;
+            }
+          }
         } catch (e) {
           console.error(e);
         }
