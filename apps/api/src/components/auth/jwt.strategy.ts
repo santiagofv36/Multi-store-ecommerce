@@ -21,12 +21,17 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const user = await this.userService.findOne({ _id });
 
     if (!user) {
-      throw new UnauthorizedException('Login first to access this resource');
+      throw new UnauthorizedException('404-user');
     }
 
-    return {
-      user,
-      token,
-    };
+    if (!user.activeSession?.token) {
+      throw new UnauthorizedException('404-missing-token');
+    }
+
+    if (user.activeSession?.token !== token) {
+      throw new UnauthorizedException('400-invalid-token');
+    }
+
+    return user;
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { TLoginInput, TPayloadInput } from '@packages/models';
+import { IUser, TLoginInput, TPayloadInput } from '@packages/models';
 import { UserService } from '../user/user.service';
 import { verify } from 'argon2';
 import { JwtService } from '@nestjs/jwt';
@@ -32,9 +32,34 @@ export class AuthService {
 
     const token = this.jwtService.sign(cleanUserId);
 
-    return {
-      user,
-      token,
-    };
+    return await this.userService.updateOne(
+      {
+        _id: user._id,
+      },
+      {
+        activeSession: {
+          token,
+          expiryDate: new Date(
+            Date.now() + Number(process.env.JWT_EXPIRES || 0),
+          ),
+        },
+      },
+      { new: true },
+    );
+  }
+
+  async logout(user: IUser): Promise<IUser | null> {
+    return await this.userService.updateOne(
+      {
+        _id: user._id,
+      },
+      {
+        activeSession: {
+          token: '',
+          expiryDate: new Date(),
+        },
+      },
+      { new: true },
+    );
   }
 }

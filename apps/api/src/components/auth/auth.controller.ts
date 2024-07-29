@@ -6,6 +6,7 @@ import {
   Get,
   UseGuards,
   Req,
+  Delete,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ZodValidationPipe } from 'src/core/pipes/zodValidation.pipe';
@@ -26,5 +27,11 @@ export class AuthController {
   @UseGuards(AuthGuard('jwt'))
   async currentUser(@Req() req: any): Promise<any> {
     return req.user;
+  }
+
+  @Delete('')
+  @UseGuards(AuthGuard('jwt'))
+  async logout(@Req() req: any): Promise<any> {
+    return this.authService.logout(req.user);
   }
 }
