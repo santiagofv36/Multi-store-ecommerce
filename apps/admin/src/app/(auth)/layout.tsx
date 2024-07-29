@@ -15,10 +15,10 @@ export default function RootLayout({
 
   React.useEffect(() => {
     if (status === 'authenticated') {
-      localStorage.setItem('token', session.user.token);
+      localStorage.setItem('token', session.user.activeSession.token);
       router.push('/dashboard');
     }
-  }, [status]);
+  }, [status, router]);
 
   return (
     <main className=" min-h-[100dvh] flex items-center justify-center">

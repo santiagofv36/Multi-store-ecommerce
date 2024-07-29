@@ -7,14 +7,18 @@ declare module 'next-auth' {
       _id: string;
       active: boolean;
       email: string;
-      token: string;
+      activeSession: {
+        token: string;
+      };
     } & DefaultSession['user'];
   }
 
   interface User {
     _id: string;
     email: string;
-    token: string;
+    activeSession: {
+      token: string;
+    };
   }
 
   interface JWT extends DefaultJWT {

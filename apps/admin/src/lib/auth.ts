@@ -8,7 +8,7 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   pages: {
-    signIn: '/sign-in',
+    signIn: '/sign-in', // TODO: Add the path to your sign in page
   },
   providers: [
     CredentialsProvider({
@@ -22,25 +22,22 @@ export const authOptions: NextAuthOptions = {
           // Call backend and set the token in local storage
 
           if (credentials?.email && credentials?.password) {
-            const response = await axios.post<{
-              user: IUser;
-              token: string;
-            }>(`${process.env.NEXT_PUBLIC_API_URL}/auth/`, {
-              email: credentials.email,
-              password: credentials.password,
-            });
+            const response = await axios.post<IUser>(
+              `${process.env.NEXT_PUBLIC_API_URL}/auth/`,
+              {
+                email: credentials.email,
+                password: credentials.password,
+              }
+            );
 
             const { data } = response;
 
             if (data) {
               if (typeof window !== 'undefined') {
-                localStorage.setItem('token', data.token);
+                localStorage.setItem('token', data.activeSession!.token);
               }
 
-              return {
-                ...data.user,
-                token: data.token,
-              };
+              return data;
             }
           }
         } catch (e) {

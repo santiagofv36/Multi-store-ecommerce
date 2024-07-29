@@ -21,7 +21,7 @@ export const fetchWrapper = async <DataType>({
 
   // add access token if needed
   if (typeof window !== 'undefined' && localStorage.getItem('token') !== null) {
-    headers['Authorization'] = localStorage.getItem('token')!;
+    headers['Authorization'] = `Bearer ${localStorage.getItem('token')!}`;
   }
 
   const response = await fetch(process.env.NEXT_PUBLIC_API_URL + url, {
@@ -112,8 +112,9 @@ export const axios = Axios.create({
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
-    'x-access-token':
-      typeof window !== 'undefined' ? localStorage.getItem('token') : undefined,
+    Authorization:
+      typeof window !== 'undefined'
+        ? `Bearer ${localStorage.getItem('token')}`
+        : undefined,
   },
 });
-
