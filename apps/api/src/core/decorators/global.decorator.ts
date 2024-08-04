@@ -11,16 +11,14 @@ import {
 import { ZodValidationPipe } from '../pipes';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../guards/roles.guard';
-import { Roles } from './roles.decorator';
 import { Operation } from './operation.decorator';
 import { Document } from './document.decorator';
-import { TPermissionsEnum, TRoleEnum } from '@packages/models';
+import { TPermissionsEnum } from '@packages/models';
 
 type MethodDecorator = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
 interface CustomDecoratorOptions {
   zodSchema?: any;
-  roles?: TRoleEnum[];
   operation?: TPermissionsEnum;
   route?: string;
   anonymous?: boolean;
@@ -33,7 +31,6 @@ export function Base(
 ) {
   const {
     zodSchema,
-    roles = [],
     operation,
     route = '',
     anonymous = false,
@@ -76,9 +73,6 @@ export function Base(
     if (!anonymous) {
       decoratorsToApply.push(UseGuards(AuthGuard('jwt')));
       decoratorsToApply.push(UseGuards(RolesGuard));
-      if (roles.length > 0) {
-        decoratorsToApply.push(Roles(...roles));
-      }
       if (operation) {
         decoratorsToApply.push(Operation(operation));
       }
