@@ -12,12 +12,13 @@ export const userSchema = new Schema<IUser>(
     email: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     password: { type: String, required: true },
-    activeSessions: sessionSchema,
-    address: {
-      type: Schema.Types.ObjectId,
-      ref: 'Address',
-      required: true,
-    }
+    activeSession: sessionSchema,
+    // activeSessions: sessionSchema,
+    // address: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: 'Address',
+    //   required: true,
+    // }
   },
   { timestamps: true }
 );

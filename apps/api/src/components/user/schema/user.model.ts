@@ -1,10 +1,15 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { createUserInput, userDefinition } from '@packages/models';
+import { createUserInput, sessionDefinition } from '@packages/models';
 import { hash } from 'argon2';
-import { Document, Types } from 'mongoose';
-import { Address, AddressSchema } from '../../address/schema/address.model';
+import { Types } from 'mongoose';
+
 import { zodToClass } from '../../../lib/zod-to-schema';
-import { Type, Exclude } from 'class-transformer';
+import { Exclude } from 'class-transformer';
+
+@Schema({
+  timestamps: true,
+})
+class ActiveSession extends zodToClass(sessionDefinition) {}
 
 @Schema({
   timestamps: true,
@@ -12,9 +17,8 @@ import { Type, Exclude } from 'class-transformer';
 export class User extends zodToClass(createUserInput) {
   @Exclude()
   password: string;
-  @Prop({ type: Types.ObjectId, ref: Address.name })
-  @Type(() => Address)
-  address: Address;
+  @Prop()
+  activeSession: ActiveSession;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

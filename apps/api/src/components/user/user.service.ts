@@ -23,9 +23,7 @@ export class UserService implements IService<IUser, TFilterUsersInput> {
     projection?: ProjectionType<IUser> | null,
     options?: QueryOptions<IUser> | null,
   ): Promise<IUser[] | IUser> {
-    return this.User.find(filter, projection, options)
-      .select('-password')
-      .populate('address'); // Here is the population added if needed
+    return this.User.find(filter, projection, options); // Here is the population added if needed
   }
 
   async findOne(
@@ -63,5 +61,13 @@ export class UserService implements IService<IUser, TFilterUsersInput> {
     const user = await this.User.create(data);
 
     return user;
+  }
+
+  async updateOne(
+    filter: FilterQuery<IUser>,
+    data: Partial<IUser>,
+    options?: QueryOptions<IUser> | null,
+  ): Promise<IUser | null> {
+    return this.User.findByIdAndUpdate(filter, data, options);
   }
 }
