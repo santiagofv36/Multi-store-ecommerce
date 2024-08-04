@@ -3,3 +3,4 @@ export * from './basicDefinitions';
 export * from './address';
 export * from './session';
 export * from './auth';
+export * from './store';
