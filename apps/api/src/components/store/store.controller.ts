@@ -1,18 +1,20 @@
-import { Body, Controller } from '@nestjs/common';
+import { Body } from '@nestjs/common';
 import { StoreService } from './store.service';
 import { createStoreInput, TCreateStoreInput } from '@packages/models';
 import { Base } from '../../core/decorators/global.decorator';
+import { CustomController } from '../../core';
 
-@Controller('store')
+@CustomController({
+  route: 'store',
+  document: 'store',
+})
 export class StoreController {
   constructor(private readonly storeService: StoreService) {}
 
   @Base('POST', {
     route: '',
     zodSchema: createStoreInput,
-    roles: ['superadmin', 'admin'],
     operation: 'create',
-    document: 'store',
   })
   async create(@Body() data: TCreateStoreInput) {
     return await this.storeService.createStore(data);

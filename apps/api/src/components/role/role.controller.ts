@@ -2,14 +2,17 @@ import { Body, Controller } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { Base } from '../../core/decorators/global.decorator';
 import { createRoleInput, TCreateRoleInput } from '@packages/models';
+import { CustomController } from 'src/core';
 
-@Controller('role')
+@CustomController({
+  route: 'role',
+  document: 'role',
+})
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
   @Base('POST', {
     route: '',
-    anonymous: true,
     zodSchema: createRoleInput,
   })
   async create(@Body() data: TCreateRoleInput) {

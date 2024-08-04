@@ -12,7 +12,6 @@ import { ZodValidationPipe } from '../pipes';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../guards/roles.guard';
 import { Operation } from './operation.decorator';
-import { Document } from './document.decorator';
 import { TPermissionsEnum } from '@packages/models';
 
 type MethodDecorator = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
@@ -22,20 +21,13 @@ interface CustomDecoratorOptions {
   operation?: TPermissionsEnum;
   route?: string;
   anonymous?: boolean;
-  document?: string;
 }
 
 export function Base(
   method: MethodDecorator,
   options: CustomDecoratorOptions = {},
 ) {
-  const {
-    zodSchema,
-    operation,
-    route = '',
-    anonymous = false,
-    document,
-  } = options;
+  const { zodSchema, operation, route = '', anonymous = false } = options;
 
   const methodDecorator = (
     target: any,
@@ -75,9 +67,6 @@ export function Base(
       decoratorsToApply.push(UseGuards(RolesGuard));
       if (operation) {
         decoratorsToApply.push(Operation(operation));
-      }
-      if (document) {
-        decoratorsToApply.push(Document(document));
       }
     }
 
