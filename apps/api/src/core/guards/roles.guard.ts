@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { TPermissionsEnum, TRoleEnum } from '@packages/models';
-import { RoleService } from 'src/components/role/role.service';
+import { TPermissionsEnum } from '@packages/models';
+import { RoleService } from '../../components/role/role.service';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -11,22 +11,14 @@ export class RolesGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const roles = this.reflector.get<TRoleEnum[]>(
-      'roles',
-      context.getHandler(),
-    );
-
     const operation = this.reflector.get<TPermissionsEnum>(
       'operation',
       context.getHandler(),
     );
 
-    const document = this.reflector.get<string>(
-      'document',
-      context.getHandler(),
-    );
+    const document = this.reflector.get<string>('document', context.getClass());
 
-    if (!roles || !operation || !document) {
+    if (!operation || !document) {
       return false;
     }
 
