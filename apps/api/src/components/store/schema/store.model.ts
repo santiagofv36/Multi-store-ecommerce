@@ -1,4 +1,4 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Schema, SchemaFactory } from '@nestjs/mongoose';
 import { createStoreInput } from '@packages/models';
 import { zodToClass } from '../../../lib/zod-to-schema';
 
