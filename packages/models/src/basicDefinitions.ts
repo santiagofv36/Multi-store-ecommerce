@@ -1,6 +1,10 @@
 import { z } from 'zod';
 import { Types } from 'mongoose';
 
+export const roles = ['user', 'admin', 'superadmin'] as const;
+
+export type TRoleEnum = (typeof roles)[number];
+
 export const basicDefinition = z.object({
   _id: z.instanceof(Types.ObjectId).optional(),
   createdAt: z.string().datetime().or(z.date()).nullable().optional(),
