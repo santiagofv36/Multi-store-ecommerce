@@ -1,28 +1,27 @@
-import {
-  Body,
-  Controller,
-  UsePipes,
-  Post,
-  Get,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller } from '@nestjs/common';
 import { StoreService } from './store.service';
-import { ZodValidationPipe } from 'src/core/pipes';
 import { createStoreInput, TCreateStoreInput } from '@packages/models';
-import { AuthGuard } from '@nestjs/passport';
+import { Base } from '../../core/decorators/global.decorator';
 
 @Controller('store')
 export class StoreController {
   constructor(private readonly storeService: StoreService) {}
 
-  @Post('')
-  @UsePipes(new ZodValidationPipe(createStoreInput))
-  @UseGuards(AuthGuard('jwt'))
+  @Base('POST', {
+    route: '',
+    zodSchema: createStoreInput,
+    roles: ['superadmin', 'admin'],
+    operation: 'create',
+  })
   async create(@Body() data: TCreateStoreInput) {
     return await this.storeService.createStore(data);
   }
 
-  @Get('')
+  @Base('GET', {
+    route: '',
+    operation: 'read',
+    anonymous: true,
+  })
   async find() {
     return await this.storeService.find({});
   }
