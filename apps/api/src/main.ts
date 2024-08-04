@@ -6,11 +6,7 @@ async function bootstrap() {
   app.setGlobalPrefix(`api/${process.env.API_VERSION!}`);
 
   app.enableCors({
-    // origin: JSON.parse(process.env.CORS_ORIGINS ?? '["*"]'), // TODO: change for a environment variable
-    origin: '*',
-    // methods: 'GET,POST,PUT,DELETE,PATCH',
-    // preflightContinue: false,
-    // allowedHeaders: 'Content Type, Accept',
+    origin: JSON.parse(process.env.CORS_ORIGINS ?? '["*"]'),
     credentials: true,
   });
 

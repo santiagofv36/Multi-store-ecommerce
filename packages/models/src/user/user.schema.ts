@@ -13,6 +13,11 @@ export const userSchema = new Schema<IUser>(
     name: { type: String, required: true },
     password: { type: String, required: true },
     activeSession: sessionSchema,
+    role: {
+      type: Schema.Types.ObjectId,
+      ref: 'Role',
+      required: true,
+    },
     // activeSessions: sessionSchema,
     // address: {
     //   type: Schema.Types.ObjectId,

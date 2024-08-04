@@ -4,6 +4,7 @@ import './globals.css';
 import QueryProvider from '../context/query-context';
 import { NextAuthProvider } from '../context/auth-provider';
 import { UserContextProvider } from '@admin/context/user-provider';
+import ModalProvider from '@admin/context/modal-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,7 +23,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <QueryProvider>
           <NextAuthProvider>
-            <UserContextProvider>{children}</UserContextProvider>
+            <UserContextProvider>
+              <ModalProvider />
+              {children}
+            </UserContextProvider>
           </NextAuthProvider>
         </QueryProvider>
       </body>

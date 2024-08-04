@@ -1,20 +1,49 @@
 import { Body, Controller, Get, Post, UsePipes } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ZodValidationPipe } from '../../core/pipes';
-import { createUserInput, TCreateUserInput } from '@packages/models';
+import {
+  createUserInput,
+  filterUserInput,
+  TCreateUserInput,
+  TFilterUsersInput,
+} from '@packages/models';
+import { Base } from '../../core/decorators/global.decorator';
+import { CustomController } from 'src/core';
 
-@Controller('user')
+@CustomController({
+  route: 'user',
+  document: 'user',
+})
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post('')
-  @UsePipes(new ZodValidationPipe(createUserInput))
+  @Base('POST', {
+    zodSchema: createUserInput,
+    anonymous: true,
+  })
   create(@Body() data: TCreateUserInput) {
     return this.userService.createUser(data);
   }
 
-  @Get('')
+  @Base('GET', {
+    anonymous: true,
+  })
   async find() {
     return this.userService.find({});
+  }
+
+  @Base('PUT', {
+    route: '',
+    zodSchema: filterUserInput,
+    anonymous: true,
+  })
+  async update(@Body() data: TFilterUsersInput) {
+    return await this.userService.updateOne(
+      {
+        _id: data?._id,
+      },
+      data!,
+      { new: true },
+    );
   }
 }
