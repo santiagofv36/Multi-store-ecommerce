@@ -5,8 +5,15 @@ export const roles = ['user', 'admin', 'superadmin'] as const;
 
 export type TRoleEnum = (typeof roles)[number];
 
+export const objectIdString = z
+  .string()
+  .refine((val) => Types.ObjectId.isValid(val), {
+    message: 'Invalid ObjectId',
+  })
+  .transform((val) => new Types.ObjectId(val));
+
 export const basicDefinition = z.object({
-  _id: z.instanceof(Types.ObjectId).optional(),
+  _id: objectIdString.optional(),
   createdAt: z.string().datetime().or(z.date()).nullable().optional(),
   updatedAt: z.string().datetime().or(z.date()).nullable().optional(),
 });
@@ -33,10 +40,3 @@ export type Pagination<Model> = {
     hasNextPage: boolean;
   };
 };
-
-export const objectIdString = z
-  .string()
-  .refine((val) => Types.ObjectId.isValid(val), {
-    message: 'Invalid ObjectId',
-  })
-  .transform((val) => new Types.ObjectId(val));

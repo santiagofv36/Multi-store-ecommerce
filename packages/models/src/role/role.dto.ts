@@ -14,11 +14,22 @@ export type TPermissionsEnum = (typeof permissions)[number];
 export const roleDefinition = basicDefinition.extend({
   name: z.string(),
   description: z.string(),
-  document: z.array(
+  documents: z.array(
     z.object({
       name: z.string(),
-      description: z.string(),
-      permissions: z.enum(permissions),
+      permissions: z.array(z.enum(permissions)),
     })
   ),
 });
+
+export const createRoleInput = roleDefinition.omit({
+  _id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type TCreateRoleInput = z.infer<typeof createRoleInput>;
+
+export const filterRoleInput = roleDefinition.partial().optional();
+
+export type TFilterRoleInput = z.infer<typeof filterRoleInput>;

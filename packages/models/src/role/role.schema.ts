@@ -12,18 +12,15 @@ export const roleSchema = new Schema<IRole>(
     name: {
       type: String,
       required: true,
+      unique: true,
     },
     description: {
       type: String,
       required: true,
     },
-    document: [
+    documents: [
       {
         name: {
-          type: String,
-          required: true,
-        },
-        description: {
           type: String,
           required: true,
         },
