@@ -4,7 +4,7 @@ import React from 'react';
 import { useStoreModal } from '@admin/hooks/use-store-modeal';
 import Modal from '@admin/components/ui/modal';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
-import { IStore, storeDefinition, TCreateStore } from '@packages/models';
+import { IStore, storeDefinition, TCreateStoreInput } from '@packages/models';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
@@ -22,7 +22,7 @@ export default function DashboardPage() {
     },
   });
 
-  const onSubmit = async (data: TCreateStore) => {
+  const onSubmit = async (data: TCreateStoreInput) => {
     try {
       setDisabled(true);
       console.log(data);

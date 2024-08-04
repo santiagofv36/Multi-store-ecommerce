@@ -9,16 +9,16 @@ export const storeDefinition = basicDefinition.extend({
 
 // create store
 
-export const createStore = storeDefinition.omit({
+export const createStoreInput = storeDefinition.omit({
   _id: true,
   createdAt: true,
   updatedAt: true,
 });
 
-export type TCreateStore = z.infer<typeof createStore>;
+export type TCreateStoreInput = z.infer<typeof createStoreInput>;
 
 // pagination
 
-export const filterStore = storeDefinition.partial().optional();
+export const filterStoreInput = storeDefinition.partial().optional();
 
-export type TFilterStore = z.infer<typeof filterStore>;
+export type TFilterStoreInput = z.infer<typeof filterStoreInput>;
