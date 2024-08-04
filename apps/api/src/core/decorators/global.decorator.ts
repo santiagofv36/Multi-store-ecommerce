@@ -13,6 +13,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../guards/roles.guard';
 import { Roles } from './roles.decorator';
 import { Operation } from './operation.decorator';
+import { Document } from './document.decorator';
 import { TPermissionsEnum, TRoleEnum } from '@packages/models';
 
 type MethodDecorator = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
@@ -23,6 +24,7 @@ interface CustomDecoratorOptions {
   operation?: TPermissionsEnum;
   route?: string;
   anonymous?: boolean;
+  document?: string;
 }
 
 export function Base(
@@ -35,6 +37,7 @@ export function Base(
     operation,
     route = '',
     anonymous = false,
+    document,
   } = options;
 
   const methodDecorator = (
@@ -78,6 +81,9 @@ export function Base(
       }
       if (operation) {
         decoratorsToApply.push(Operation(operation));
+      }
+      if (document) {
+        decoratorsToApply.push(Document(document));
       }
     }
 

@@ -12,6 +12,7 @@ export class StoreController {
     zodSchema: createStoreInput,
     roles: ['superadmin', 'admin'],
     operation: 'create',
+    document: 'store',
   })
   async create(@Body() data: TCreateStoreInput) {
     return await this.storeService.createStore(data);
