@@ -9,11 +9,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import StoreForm from '../forms/store-form';
+import { useCreateStore } from '@admin/services/store';
 
 export default function DashboardPage() {
   const { isOpen, close } = useStoreModal();
 
   const [disabled, setDisabled] = React.useState<boolean>(false);
+
+  const createStore = useCreateStore();
 
   const form = useForm<IStore>({
     resolver: zodResolver(storeDefinition),
@@ -22,10 +25,16 @@ export default function DashboardPage() {
     },
   });
 
+  const onClose = () => {
+    close();
+    form.reset();
+  };
+
   const onSubmit = async (data: TCreateStoreInput) => {
     try {
       setDisabled(true);
-      console.log(data);
+      await createStore.mutateAsync(data);
+      onClose();
     } catch (error) {
     } finally {
       setDisabled(false);
