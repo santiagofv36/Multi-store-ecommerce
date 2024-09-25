@@ -3,15 +3,15 @@
 import React from 'react';
 import { useStoreModal } from '@admin/hooks/use-store-modeal';
 import Modal from '@admin/components/ui/modal';
-import { FormProvider, useForm, useFormContext } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { IStore, storeDefinition, TCreateStoreInput } from '@packages/models';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Label } from '../ui/label';
-import { Input } from '../ui/input';
 import StoreForm from '../forms/store-form';
 import { useCreateStore } from '@admin/services/store';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
-export default function DashboardPage() {
+export default function StoreModal() {
   const { isOpen, close } = useStoreModal();
 
   const [disabled, setDisabled] = React.useState<boolean>(false);
@@ -25,6 +25,8 @@ export default function DashboardPage() {
     },
   });
 
+  const router = useRouter();
+
   const onClose = () => {
     close();
     form.reset();
@@ -33,9 +35,13 @@ export default function DashboardPage() {
   const onSubmit = async (data: TCreateStoreInput) => {
     try {
       setDisabled(true);
-      await createStore.mutateAsync(data);
+      const store = await createStore.mutateAsync(data);
       onClose();
+      toast.success('Store created successfully');
+      router.push(`/dashboard/${store._id}`);
     } catch (error) {
+      console.log(error);
+      toast.error('Something when wrong');
     } finally {
       setDisabled(false);
     }

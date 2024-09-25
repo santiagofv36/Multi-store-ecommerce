@@ -1,7 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Store } from './schema/store.model';
-import { FilterQuery, Model, ProjectionType, QueryOptions } from 'mongoose';
+import {
+  FilterQuery,
+  Model,
+  ProjectionType,
+  QueryOptions,
+  Types,
+} from 'mongoose';
 import {
   IStore,
   Pagination,
@@ -20,8 +26,13 @@ export class StoreService {
     filter: FilterQuery<IStore>,
     projection?: ProjectionType<IStore> | null,
     options?: QueryOptions<IStore> | null,
-  ): Promise<IStore[] | IStore> {
-    return this.Store.find(filter, projection, options);
+  ): Promise<IStore[]> {
+    return this.Store.find(filter, projection, options).populate([
+      {
+        path: 'user',
+        populate: 'role',
+      },
+    ]);
   }
 
   async findOne(
@@ -29,7 +40,12 @@ export class StoreService {
     projection?: ProjectionType<IStore> | null,
     options?: QueryOptions<IStore> | null,
   ): Promise<IStore | null> {
-    return this.Store.findOne(filter, projection, options);
+    return this.Store.findOne(filter, projection, options).populate([
+      {
+        path: 'user',
+        populate: 'role',
+      },
+    ]);
   }
 
   async paginate(
