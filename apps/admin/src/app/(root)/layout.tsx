@@ -10,13 +10,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [user, setUser] = useUser();
+  const [_, setUser] = useUser();
 
   const { data, isLoading } = useCurrentUser();
 
   React.useEffect(() => {
     // Validate if useCurrentUser have and Error or Return a empty object
-    if ((!isLoading && !data?._id)) {
+    if (!isLoading && !data?._id) {
       setUser(null);
       signOut();
       localStorage.removeItem('token');
@@ -27,9 +27,5 @@ export default function RootLayout({
     }
   }, [data, isLoading]);
 
-  return (
-    <main className="min-h-[100dvh] flex items-center justify-center">
-      {children}
-    </main>
-  );
+  return <main>{children}</main>;
 }
