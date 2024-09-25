@@ -9,6 +9,7 @@ export type StoreDocument = IStore & Document<Types.ObjectId, object, IStore>;
 export const storeSchema = new Schema<IStore>(
   {
     name: { type: String, required: true },
+    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   },
   { timestamps: true }
 );
