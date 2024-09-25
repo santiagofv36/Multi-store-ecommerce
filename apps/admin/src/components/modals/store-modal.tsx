@@ -1,17 +1,16 @@
 'use client';
 
 import React from 'react';
-import { useStoreModal } from '@admin/hooks/use-store-modeal';
-import Modal from '@admin/components/ui/modal';
-import { FormProvider, useForm } from 'react-hook-form';
+import { useStoreModal } from '@admin/hooks/use-store-modal';
+import { StoreForm, Modal } from '@admin/components';
 import { IStore, storeDefinition, TCreateStoreInput } from '@packages/models';
-import { zodResolver } from '@hookform/resolvers/zod';
-import StoreForm from '../forms/store-form';
 import { useCreateStore } from '@admin/services/store';
-import toast from 'react-hot-toast';
+import { FormProvider, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
-export default function StoreModal() {
+export function StoreModal() {
   const { isOpen, close } = useStoreModal();
 
   const [disabled, setDisabled] = React.useState<boolean>(false);

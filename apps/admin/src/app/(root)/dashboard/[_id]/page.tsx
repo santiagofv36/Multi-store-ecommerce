@@ -10,5 +10,5 @@ export default function Page({ params }: { params: { _id: string } }) {
 
   // TODO: redirect to 404 page if store is not valid
 
-  return <div>Tienda valida? {validStore.toString()}</div>;
+  return <div>Tienda nombre {data?.name}</div>;
 }

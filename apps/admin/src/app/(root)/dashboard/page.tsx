@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
-import { useStores } from '@admin/services/store';
-import useUser from '@admin/hooks/use-user';
 import { useRouter } from 'next/navigation';
-import { useStoreModal } from '@admin/hooks/use-store-modeal';
-import { Button } from '@admin/components/ui/button';
+import { Button } from '@admin/components';
+import useUser from '@admin/hooks/use-user';
+import { useStores } from '@admin/services/store';
+import { useStoreModal } from '@admin/hooks/use-store-modal';
 
 export default function DashboardPage() {
   const [user] = useUser();
