@@ -12,7 +12,8 @@ import { useDeleteStore, useUpdateStore } from '@admin/services/store';
 import toast from 'react-hot-toast';
 import { useQueryClient } from '@tanstack/react-query';
 import { AlertModal } from '../modals';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
+import { ApiAlert } from '../shared/ApiAlert';
 
 interface SettingsFormProps {
   initialData: IStore;
@@ -23,6 +24,8 @@ export function SettingsForm({ initialData }: SettingsFormProps) {
     resolver: zodResolver(updateStoreInput),
     defaultValues: initialData,
   });
+
+  const params = useParams();
 
   const queryClient = useQueryClient();
   const updateStore = useUpdateStore();
@@ -92,6 +95,12 @@ export function SettingsForm({ initialData }: SettingsFormProps) {
           <SettingsFormContent />
         </form>
       </FormProvider>
+      <Separator />
+      <ApiAlert
+        title="NEXT_PUBLIC_API_URL"
+        description={`${process.env.NEXT_PUBLIC_API_URL}/stores/${params._id}`}
+        variant="public"
+      />
     </>
   );
 }
