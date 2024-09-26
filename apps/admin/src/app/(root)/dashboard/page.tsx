@@ -2,14 +2,13 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { Button } from '@admin/components';
 import useUser from '@admin/hooks/use-user';
 import { useStores } from '@admin/services/store';
 import { useStoreModal } from '@admin/hooks/use-store-modal';
 
 export default function DashboardPage() {
   const [user] = useUser();
-  const { open } = useStoreModal();
+  const { open, isOpen } = useStoreModal();
 
   const { data, isLoading } = useStores(
     {
@@ -29,10 +28,10 @@ export default function DashboardPage() {
       return;
     }
 
-    if (!isLoading && data?.length === 0) {
+    if (!isLoading && !data?.length && !isOpen) {
       open();
     }
   }, [data, isLoading, open, router]);
 
-  return <Button onClick={open}>Open</Button>;
+  return null;
 }

@@ -9,6 +9,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { useQueryClient } from '@tanstack/react-query';
 
 export function StoreModal() {
   const { isOpen, close } = useStoreModal();
@@ -25,6 +26,7 @@ export function StoreModal() {
   });
 
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const onClose = () => {
     close();
@@ -37,6 +39,7 @@ export function StoreModal() {
       const store = await createStore.mutateAsync(data);
       onClose();
       toast.success('Store created successfully');
+      queryClient.invalidateQueries({ queryKey: ['getStores'] });
       router.push(`/dashboard/${store._id}`);
     } catch (error) {
       console.log(error);
