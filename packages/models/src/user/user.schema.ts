@@ -19,12 +19,10 @@ export const userSchema = new Schema<IUser>(
       ref: 'Role',
       required: true,
     },
-    // activeSessions: sessionSchema,
-    // address: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'Address',
-    //   required: true,
-    // }
+    active: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamps: true }
 );

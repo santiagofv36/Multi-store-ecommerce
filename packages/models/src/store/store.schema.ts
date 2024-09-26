@@ -10,6 +10,10 @@ export const storeSchema = new Schema<IStore>(
   {
     name: { type: String, required: true },
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    active: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamps: true }
 );

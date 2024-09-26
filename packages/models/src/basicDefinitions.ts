@@ -19,7 +19,7 @@ export const basicDefinition = z.object({
 });
 
 export const basicModelDefinition = basicDefinition.extend({
-  active: z.boolean().default(true).optional(),
+  active: z.boolean().optional(),
 });
 
 export const paginateParams = z.object({
