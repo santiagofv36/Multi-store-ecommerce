@@ -1,6 +1,6 @@
 'use client';
 
-import StoreModal from '@admin/components/modals/store-modal';
+import { StoreModal } from '@admin/components';
 import React from 'react';
 
 export default function ModalProvider() {

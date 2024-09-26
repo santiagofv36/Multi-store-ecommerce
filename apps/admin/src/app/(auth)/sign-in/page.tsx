@@ -1,4 +1,4 @@
-import SignInForm from '@admin/components/forms/sign-in-form';
+import { SignInForm } from '@admin/components';
 
 export default function SignInPage() {
   return <SignInForm />;

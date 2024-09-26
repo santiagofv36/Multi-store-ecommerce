@@ -10,7 +10,8 @@ import { roleDefinition } from '../role';
 
 export const userDefinition = basicModelDefinition.extend({
   email: z.string().email({ message: 'Invalid email' }),
-  name: z.string().min(2),
+  firstName: z.string().min(2),
+  lastName: z.string().min(2),
   password: z.string().min(8),
   activeSession: sessionDefinition.optional(),
   // address: z.union([objectIdString, addressDefinition]), // if it is many just use z.array(z.instanceof(Types.ObjectId)) and in the schema use [Schema.Types.ObjectId]

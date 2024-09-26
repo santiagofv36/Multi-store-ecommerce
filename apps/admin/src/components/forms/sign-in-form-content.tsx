@@ -18,7 +18,7 @@ interface SignInFormContentProps {
   disabled: boolean;
 }
 
-export default function SigInFormContent({ disabled }: SignInFormContentProps) {
+export function SigInFormContent({ disabled }: SignInFormContentProps) {
   const {
     formState: { isValid, errors },
     register,

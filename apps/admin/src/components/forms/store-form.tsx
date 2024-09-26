@@ -10,7 +10,7 @@ interface StoreFormProps {
   onCancel: () => void;
 }
 
-export default function StoreForm({ disabled, onCancel }: StoreFormProps) {
+export function StoreForm({ disabled, onCancel }: StoreFormProps) {
   const {
     register,
     formState: { isValid, errors },

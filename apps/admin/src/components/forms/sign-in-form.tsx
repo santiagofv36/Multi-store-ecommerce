@@ -6,9 +6,9 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { TAuthSchemaForm, AuthSchema } from '@packages/models';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
-import SigInFormContent from './sign-in-form-content';
+import { SigInFormContent } from '@admin/components';
 
-export default function SignInForm() {
+export function SignInForm() {
   const router = useRouter();
   const [disabled, setDisabled] = React.useState<boolean>(false);
 

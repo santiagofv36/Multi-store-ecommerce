@@ -1,9 +1,9 @@
 'use client';
 
+import React from 'react';
 import useUser from '@admin/hooks/use-user';
 import { useCurrentUser } from '@admin/services/auth';
 import { signOut } from 'next-auth/react';
-import React from 'react';
 
 export default function RootLayout({
   children,
