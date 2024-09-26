@@ -18,3 +18,5 @@ export * from './tabs';
 export * from './toast';
 export * from './tooltip';
 export * from './use-toast';
+export * from './popover';
+export * from './command';
