@@ -13,9 +13,9 @@ export function MainNav({
 
   const routes = [
     {
-      href: `/${params._id}/settings`,
+      href: `/dashboard/${params._id}/settings`,
       label: 'Settings',
-      active: pathname === `/${params._id}/settings`,
+      active: pathname === `/dashboard/${params._id}/settings`,
     },
   ];
 

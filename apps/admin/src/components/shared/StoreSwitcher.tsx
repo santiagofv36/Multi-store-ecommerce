@@ -33,10 +33,13 @@ export function StoreSwitcher({ items = [], className }: StoreSwitcherProps) {
   const params = useParams();
   const router = useRouter();
 
-  const formattedItems = items.map((item) => ({
-    label: item.name,
-    value: item._id,
-  }));
+  const formattedItems =
+    items.length > 0
+      ? items?.map((item) => ({
+          label: item.name,
+          value: item._id,
+        }))
+      : [];
 
   const currentStore = formattedItems.find(
     (item) => item.value?.toString() === params._id

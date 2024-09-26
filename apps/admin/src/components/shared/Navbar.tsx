@@ -12,6 +12,7 @@ export function Navbar() {
     {
       queryKey: ['getStores', `user=${user?._id}`],
       enabled: !!user,
+      
     }
   );
 
