@@ -7,6 +7,7 @@ import { TAuthSchemaForm, AuthSchema } from '@packages/models';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
 import { SigInFormContent } from '@admin/components';
+import toast from 'react-hot-toast';
 
 export function SignInForm() {
   const router = useRouter();
@@ -28,15 +29,14 @@ export function SignInForm() {
       });
 
       if (res?.ok) {
-        // TODO: Redirect to the dashboard & show a success message
         router.replace('/dashboard');
       }
 
       if (res?.status === 401) {
-        // TODO: Show an error message
+        toast.error('Invalid credentials');
       }
     } catch (error) {
-      // TODO: Show an error message
+      toast.error('Something went wrong');
     } finally {
       setDisabled(false);
     }

@@ -23,7 +23,14 @@ export class UserService implements IService<IUser, TFilterUsersInput> {
     projection?: ProjectionType<IUser> | null,
     options?: QueryOptions<IUser> | null,
   ): Promise<IUser[] | IUser> {
-    return this.User.find(filter, projection, options).populate('role'); // Here is the population added if needed
+    return this.User.find(
+      {
+        ...filter,
+        active: true,
+      },
+      projection,
+      options,
+    ).populate('role'); // Here is the population added if needed
   }
 
   async findOne(
@@ -31,7 +38,14 @@ export class UserService implements IService<IUser, TFilterUsersInput> {
     projection?: ProjectionType<IUser> | null,
     options?: QueryOptions<IUser> | null,
   ): Promise<IUser | null> {
-    return this.User.findOne(filter, projection, options);
+    return this.User.findOne(
+      {
+        ...filter,
+        active: true,
+      },
+      projection,
+      options,
+    );
   }
 
   async paginate(

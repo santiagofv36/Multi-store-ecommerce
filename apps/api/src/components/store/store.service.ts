@@ -1,18 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Store } from './schema/store.model';
-import {
-  FilterQuery,
-  Model,
-  ProjectionType,
-  QueryOptions,
-  Types,
-} from 'mongoose';
+import { FilterQuery, Model, ProjectionType, QueryOptions } from 'mongoose';
 import {
   IStore,
   Pagination,
   TCreateStoreInput,
   TFilterStoreInput,
+  TFindOneStoreInput,
 } from '@packages/models';
 
 @Injectable()
@@ -27,7 +22,14 @@ export class StoreService {
     projection?: ProjectionType<IStore> | null,
     options?: QueryOptions<IStore> | null,
   ): Promise<IStore[]> {
-    return this.Store.find(filter, projection, options).populate([
+    return this.Store.find(
+      {
+        ...filter,
+        active: true,
+      },
+      projection,
+      options,
+    ).populate([
       {
         path: 'user',
         populate: 'role',
@@ -40,7 +42,14 @@ export class StoreService {
     projection?: ProjectionType<IStore> | null,
     options?: QueryOptions<IStore> | null,
   ): Promise<IStore | null> {
-    return this.Store.findOne(filter, projection, options).populate([
+    return this.Store.findOne(
+      {
+        ...filter,
+        active: true,
+      },
+      projection,
+      options,
+    ).populate([
       {
         path: 'user',
         populate: 'role',
@@ -66,5 +75,15 @@ export class StoreService {
 
   async createStore(data: TCreateStoreInput) {
     return this.Store.create(data);
+  }
+
+  async deleteOne(filter: FilterQuery<IStore>): Promise<IStore | null> {
+    return this.Store.findOneAndUpdate(
+      filter,
+      {
+        active: false,
+      },
+      { new: true },
+    );
   }
 }

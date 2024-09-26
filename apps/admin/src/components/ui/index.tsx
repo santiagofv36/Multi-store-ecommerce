@@ -20,3 +20,4 @@ export * from './tooltip';
 export * from './use-toast';
 export * from './popover';
 export * from './command';
+export * from './badge';

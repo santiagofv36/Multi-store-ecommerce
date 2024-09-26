@@ -69,4 +69,13 @@ export class StoreController {
       { new: true },
     );
   }
+
+  @Base('DELETE', {
+    operation: 'delete',
+    route: ':_id',
+    zodSchema: findOneStoreInput,
+  })
+  async deleteOne(@Param() _id: string) {
+    return await this.storeService.deleteOne({ _id });
+  }
 }

@@ -1,4 +1,4 @@
-import { basicDefinition } from '../basicDefinitions';
+import { basicModelDefinition } from '../basicDefinitions';
 import { z } from 'zod';
 
 export const permissions = [
@@ -11,7 +11,7 @@ export const permissions = [
 
 export type TPermissionsEnum = (typeof permissions)[number];
 
-export const roleDefinition = basicDefinition.extend({
+export const roleDefinition = basicModelDefinition.extend({
   name: z.string(),
   description: z.string(),
   documents: z.array(
