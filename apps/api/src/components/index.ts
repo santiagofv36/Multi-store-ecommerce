@@ -3,6 +3,7 @@ import { AuthModule } from './auth';
 import { UserModule } from './user';
 import { StoreModule } from './store';
 import { RoleModule } from './role';
+import { BillboardModule } from './billboard';
 
 export const moduleComponents = [
   AddressModule,
@@ -10,4 +11,5 @@ export const moduleComponents = [
   UserModule,
   StoreModule,
   RoleModule,
+  BillboardModule,
 ];
