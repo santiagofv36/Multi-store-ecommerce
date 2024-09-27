@@ -1,9 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import {
-  createUserInput,
-  roleDefinition,
-  sessionDefinition,
-} from '@packages/models';
+import { createUserInput, sessionDefinition } from '@packages/models';
 import { hash } from 'argon2';
 import { Types } from 'mongoose';
 

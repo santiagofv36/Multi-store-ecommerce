@@ -9,7 +9,7 @@ import {
 } from '@packages/models';
 import { FilterQuery, Model, ProjectionType, QueryOptions } from 'mongoose';
 import { User } from './schema/user.model';
-import { IService } from 'src/core/service.interface';
+import { IService } from '../../core';
 
 @Injectable()
 export class UserService implements IService<IUser, TFilterUsersInput> {
