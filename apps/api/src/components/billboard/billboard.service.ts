@@ -27,7 +27,7 @@ export class BillboardService
       { ...filter, active: true },
       projection,
       options,
-    ).populate('store');
+    );
   }
   async find(
     filter: FilterQuery<IBillboard>,
@@ -38,7 +38,7 @@ export class BillboardService
       { ...filter, active: true },
       projection,
       options,
-    ).populate('store');
+    );
   }
   async paginate(
     data: TFilterBillboardsInput,

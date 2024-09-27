@@ -10,6 +10,7 @@ export const storeSchema = new Schema<IStore>(
   {
     name: { type: String, required: true },
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    billboards: [{ type: Schema.Types.ObjectId, ref: 'Billboard' }],
     active: {
       type: Boolean,
       default: true,

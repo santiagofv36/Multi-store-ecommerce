@@ -7,7 +7,6 @@ import {
   Pagination,
   TCreateStoreInput,
   TFilterStoreInput,
-  TFindOneStoreInput,
 } from '@packages/models';
 
 @Injectable()
@@ -34,6 +33,9 @@ export class StoreService {
         path: 'user',
         populate: 'role',
       },
+      {
+        path: 'billboards',
+      },
     ]);
   }
 
@@ -53,6 +55,9 @@ export class StoreService {
       {
         path: 'user',
         populate: 'role',
+      },
+      {
+        path: 'billboards',
       },
     ]);
   }

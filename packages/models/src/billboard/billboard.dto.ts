@@ -1,9 +1,7 @@
 import { z } from 'zod';
-import { basicModelDefinition, objectIdString } from '../basicDefinitions';
-import { storeDefinition } from '../store';
+import { basicModelDefinition } from '../basicDefinitions';
 
 export const billboardDefinition = basicModelDefinition.extend({
-  store: z.union([objectIdString, storeDefinition]),
   label: z.string(),
   imageUrl: z.string(),
 });

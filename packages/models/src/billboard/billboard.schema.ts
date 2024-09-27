@@ -17,11 +17,6 @@ export const billboardSchema = new Schema<IBillboard>(
       type: String,
       required: true,
     },
-    store: {
-      type: Schema.Types.ObjectId,
-      ref: 'Store',
-      required: true,
-    },
     active: {
       type: Boolean,
       default: true,

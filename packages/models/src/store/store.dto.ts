@@ -1,12 +1,16 @@
 import { userDefinition } from '../user';
 import { basicModelDefinition, objectIdString } from '../basicDefinitions';
 import { z } from 'zod';
+import { billboardDefinition } from '../billboard';
 
 export const storeDefinition = basicModelDefinition.extend({
   name: z
     .string()
     .min(1, { message: 'Name must be at least 1 character long' }),
   user: z.union([objectIdString, userDefinition]).optional(),
+  billboards: z
+    .union([z.array(objectIdString), z.array(billboardDefinition)])
+    .optional(),
 });
 
 // create store
