@@ -1,19 +1,16 @@
 import React from 'react';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
+import { Input, Label, Button } from '../../ui';
 import { IStore } from '@packages/models';
 import { useFormContext } from 'react-hook-form';
-import { Button } from '../ui/button';
 
 interface StoreFormProps {
-  disabled: boolean;
   onCancel: () => void;
 }
 
-export function StoreForm({ disabled, onCancel }: StoreFormProps) {
+export function StoreFormContent({ onCancel }: StoreFormProps) {
   const {
     register,
-    formState: { isValid, errors },
+    formState: { isValid, errors, isSubmitting },
   } = useFormContext<IStore>();
 
   return (
@@ -21,7 +18,7 @@ export function StoreForm({ disabled, onCancel }: StoreFormProps) {
       <Label className="text-black text-sm font-semibold">Name</Label>
       <Input
         type="text"
-        disabled={disabled}
+        disabled={isSubmitting}
         {...register('name')}
         placeholder="Store name"
       />
@@ -32,11 +29,11 @@ export function StoreForm({ disabled, onCancel }: StoreFormProps) {
         <Button
           variant="outline"
           onClick={onCancel}
-          disabled={!isValid || disabled}
+          disabled={!isValid || isSubmitting}
         >
           Cancel
         </Button>
-        <Button type="submit" disabled={!isValid || disabled}>
+        <Button type="submit" disabled={!isValid || isSubmitting}>
           Continue
         </Button>
       </div>
