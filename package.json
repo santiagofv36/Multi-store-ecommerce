@@ -7,7 +7,11 @@
     "build": "pnpm --parallel build",
     "lint": "pnpm --parallel lint",
     "start": "pnpm --parallel start",
-    "packages:build": "pnpm --parallel packages:build"
+    "packages:build": "pnpm --parallel packages:build",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.5"
   },
   "keywords": [],
   "author": "Santiago Figueroa",
