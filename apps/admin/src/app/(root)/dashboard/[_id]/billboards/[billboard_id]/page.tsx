@@ -1,5 +1,6 @@
 'use client';
 
+import { BillboardForm } from '@admin/components';
 import { useBillboard } from '@admin/services/billboard';
 
 export default function BillboardPage({
@@ -19,7 +20,9 @@ export default function BillboardPage({
 
   return (
     <div className="flex flex-col">
-      <div className="flex-1 space-y-4 p-8 pt-6"></div>
+      <div className="flex-1 space-y-4 p-8 pt-6">
+        <BillboardForm initialData={data} />
+      </div>
     </div>
   );
 }

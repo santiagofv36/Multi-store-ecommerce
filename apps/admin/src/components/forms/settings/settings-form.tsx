@@ -98,7 +98,7 @@ export function SettingsForm({ initialData }: SettingsFormProps) {
       <Separator />
       <ApiAlert
         title="NEXT_PUBLIC_API_URL"
-        description={`${process.env.NEXT_PUBLIC_API_URL}/stores/${params._id}`}
+        description={`${process.env.NEXT_PUBLIC_API_URL}/store/${params._id}`}
         variant="public"
       />
     </>
