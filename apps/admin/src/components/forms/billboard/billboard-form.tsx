@@ -21,7 +21,7 @@ import {
 import toast from 'react-hot-toast';
 import { useQueryClient } from '@tanstack/react-query';
 import { AlertModal } from '../../modals';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 interface BillboardFormProps {
   initialData: IBillboard;
@@ -40,6 +40,7 @@ export function BillboardForm({ initialData }: BillboardFormProps) {
   const router = useRouter();
   const [open, setOpen] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
+  const params = useParams();
 
   const title = initialData ? 'Edit Billboard' : 'Create Billboard';
   const description = initialData
@@ -55,10 +56,14 @@ export function BillboardForm({ initialData }: BillboardFormProps) {
     try {
       initialData
         ? await updateBillboard.mutateAsync(data) // update the billboard if it exists
-        : await createBillboard.mutateAsync(data); // create a new billboard
+        : await createBillboard.mutateAsync({
+            ...data,
+            storeId: params?._id as string,
+          }); // create a new billboard
       toast.success(toastMessage);
       // Invalidate the cache to refetch the data
       queryClient.invalidateQueries({ queryKey: ['getStores'] });
+      router.push(`/dashboard/${params._id}/billboards`);
     } catch (error) {
       toast.error('Something went wrong');
     }

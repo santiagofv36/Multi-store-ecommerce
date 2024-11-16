@@ -1,7 +1,7 @@
 import { useMutation, useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { createStore, deleteStore, updateStore } from './mutations';
 import { getStore, getStores } from './queries';
-import { TFilterStoreInput, TUpdateStoreInput } from '@packages/models';
+import { IStore, TFilterStoreInput, TUpdateStoreInput } from '@packages/models';
 
 export function useCreateStore() {
   return useMutation({
@@ -25,7 +25,7 @@ export function useStore(
   params: { _id: string },
   options?: UseQueryOptions<any, any, any, any>
 ) {
-  return useQuery({
+  return useQuery<IStore>({
     queryKey: ['getStore'],
     queryFn: () => getStore(params),
     ...options,
