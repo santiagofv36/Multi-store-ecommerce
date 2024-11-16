@@ -33,6 +33,8 @@ export function BillboardForm({ initialData }: BillboardFormProps) {
     defaultValues: initialData,
   });
 
+  const { reset } = form;
+
   const queryClient = useQueryClient();
   const updateBillboard = useUpdateBillboard();
   const createBillboard = useCreateBillboard();
@@ -52,10 +54,13 @@ export function BillboardForm({ initialData }: BillboardFormProps) {
 
   const action = initialData ? 'Save Changes' : 'Create';
 
-  const onSubmit = async (data: TCreateBillboardInput) => {
+  const onSubmit = async (data: TCreateBillboardInput | TUpdateBillboardInput) => {
     try {
       initialData
-        ? await updateBillboard.mutateAsync(data) // update the billboard if it exists
+        ? await updateBillboard.mutateAsync({
+          ...data,
+          _id: initialData._id,
+        }) // update the billboard if it exists
         : await createBillboard.mutateAsync({
             ...data,
             storeId: params?._id as string,
@@ -88,6 +93,10 @@ export function BillboardForm({ initialData }: BillboardFormProps) {
       setOpen(false);
     }
   };
+
+  React.useEffect(()=> {
+    reset(initialData);
+  },[initialData, reset])
 
   return (
     <>
