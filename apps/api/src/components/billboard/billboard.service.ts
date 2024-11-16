@@ -9,6 +9,7 @@ import {
 import { FilterQuery, Model, ProjectionType, QueryOptions } from 'mongoose';
 import { IService } from '../../core';
 import { Billboard } from './schema/billboard.model';
+import { StoreService } from '../store/store.service';
 
 @Injectable()
 export class BillboardService
@@ -17,6 +18,7 @@ export class BillboardService
   constructor(
     @InjectModel(Billboard.name)
     private Billboard: Model<IBillboard>,
+    private storeService: StoreService,
   ) {}
   async findOne(
     filter?: FilterQuery<IBillboard>,
@@ -57,7 +59,28 @@ export class BillboardService
   }
 
   async createBillboard(data: TCreateBillboardInput): Promise<IBillboard> {
-    return this.Billboard.create(data);
+    const store = await this.storeService.findOne({ _id: data?.storeId });
+
+    if (!store) {
+      throw new Error('Store not found');
+    }
+
+    delete data.storeId;
+
+    const billboardIds = store.billboards?.map((b) => b._id!) || [];
+
+    const billboard = await this.Billboard.create(data);
+
+    await this.storeService.updateOne(
+      {
+        _id: store._id,
+      },
+      {
+        billboards: [...billboardIds, billboard._id!],
+      },
+    );
+
+    return billboard;
   }
 
   async deleteOne(filter: FilterQuery<IBillboard>): Promise<IBillboard | null> {
