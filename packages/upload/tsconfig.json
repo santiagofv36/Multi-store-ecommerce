@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "Node",
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@models/*": ["./src/*"]
+    }
+  },
+  "include": ["src/**/*.ts","tests/**/*.ts", "tsup.config.ts"],
+  "exclude": ["./dist/**","node_modules"]
+}
