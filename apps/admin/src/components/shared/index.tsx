@@ -6,3 +6,4 @@ export * from './Heading';
 export * from './ApiAlert';
 export * from './Loader';
 export * from './UploadThingButton';
+export * from './cell-action';

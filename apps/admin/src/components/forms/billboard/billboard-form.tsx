@@ -22,6 +22,7 @@ import toast from 'react-hot-toast';
 import { useQueryClient } from '@tanstack/react-query';
 import { AlertModal } from '../../modals';
 import { useParams, useRouter } from 'next/navigation';
+import useUser from '@admin/hooks/use-user';
 
 interface BillboardFormProps {
   initialData: IBillboard;
@@ -43,6 +44,7 @@ export function BillboardForm({ initialData }: BillboardFormProps) {
   const [open, setOpen] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
   const params = useParams();
+  const [user] = useUser();
 
   const title = initialData ? 'Edit Billboard' : 'Create Billboard';
   const description = initialData
@@ -54,13 +56,15 @@ export function BillboardForm({ initialData }: BillboardFormProps) {
 
   const action = initialData ? 'Save Changes' : 'Create';
 
-  const onSubmit = async (data: TCreateBillboardInput | TUpdateBillboardInput) => {
+  const onSubmit = async (
+    data: TCreateBillboardInput | TUpdateBillboardInput
+  ) => {
     try {
       initialData
         ? await updateBillboard.mutateAsync({
-          ...data,
-          _id: initialData._id,
-        }) // update the billboard if it exists
+            ...data,
+            _id: initialData._id,
+          }) // update the billboard if it exists
         : await createBillboard.mutateAsync({
             ...data,
             storeId: params?._id as string,
@@ -85,7 +89,7 @@ export function BillboardForm({ initialData }: BillboardFormProps) {
       queryClient.invalidateQueries({ queryKey: ['getStores'] });
       queryClient.invalidateQueries({ queryKey: ['getStore'] });
       router.refresh();
-      router.push('/dashboard');
+      router.push(`/dashboard/${params._id}/billboards`);
     } catch (e) {
       toast.error('Something went wrong');
     } finally {
@@ -94,9 +98,9 @@ export function BillboardForm({ initialData }: BillboardFormProps) {
     }
   };
 
-  React.useEffect(()=> {
+  React.useEffect(() => {
     reset(initialData);
-  },[initialData, reset])
+  }, [initialData, reset]);
 
   return (
     <>
