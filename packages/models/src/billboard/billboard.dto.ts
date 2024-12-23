@@ -1,9 +1,11 @@
 import { z } from 'zod';
-import { basicModelDefinition } from '../basicDefinitions';
+import { basicModelDefinition, objectIdString } from '../basicDefinitions';
+import { storeDefinition } from '../store';
 
 export const billboardDefinition = basicModelDefinition.extend({
   label: z.string().min(1, { message: 'Label is required' }),
   imageUrl: z.string().url({ message: 'Image Url must be a valid URL' }),
+  store: objectIdString,
 });
 
 export const createBillboardInput = billboardDefinition
@@ -13,7 +15,7 @@ export const createBillboardInput = billboardDefinition
     updatedAt: true,
   })
   .extend({
-    storeId: z.string().optional(),
+    store: objectIdString.optional(),
   });
 
 export type TCreateBillboardInput = z.infer<typeof createBillboardInput>;
