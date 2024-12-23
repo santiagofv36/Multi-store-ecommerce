@@ -23,6 +23,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { AlertModal } from '../../modals';
 import { useParams, useRouter } from 'next/navigation';
 import useUser from '@admin/hooks/use-user';
+import { Types } from 'mongoose';
 
 interface BillboardFormProps {
   initialData: IBillboard;
@@ -67,7 +68,7 @@ export function BillboardForm({ initialData }: BillboardFormProps) {
           }) // update the billboard if it exists
         : await createBillboard.mutateAsync({
             ...data,
-            storeId: params?._id as string,
+            store: new Types.ObjectId(params?._id as string),
           }); // create a new billboard
       toast.success(toastMessage);
       // Invalidate the cache to refetch the data

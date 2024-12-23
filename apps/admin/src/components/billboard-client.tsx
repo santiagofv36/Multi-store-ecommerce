@@ -14,6 +14,7 @@ import { useDeleteBillboard } from '@admin/services/billboard';
 import toast from 'react-hot-toast';
 import { useQueryClient } from '@tanstack/react-query';
 import { Types } from 'mongoose';
+import { ApiList } from './ui/api-list';
 
 interface BillboardClientProps {
   data?: IStore;
@@ -70,7 +71,7 @@ export function BillboardClient({ data, isLoading }: BillboardClientProps) {
             data={row.original}
             onEdit={onEdit}
             onDelete={onDelete}
-            responseText='Billboard inactivated successfully'
+            responseText="Billboard inactivated successfully"
           />
         ),
       },
@@ -108,6 +109,13 @@ export function BillboardClient({ data, isLoading }: BillboardClientProps) {
       )}
       <Separator />
       <DataTable columns={columns} data={billboards} searchKey="label" />
+      <Heading title="API" description="API Calls for Billboards" />
+      <Separator />
+      <ApiList
+        entityName="billboard"
+        entityNameId="billboardId"
+        queryParam={`store=${params._id}`}
+      />
     </>
   );
 }
