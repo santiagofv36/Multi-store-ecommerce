@@ -78,4 +78,12 @@ export class StoreController {
   async deleteOne(@Param() _id: string) {
     return this.storeService.deleteOne({ _id });
   }
+
+  @Base('GET', {
+    operation: 'read',
+    route: ':_id/billboards',
+  })
+  async getBillboards(@Param() _id: string) {
+    return this.storeService.getBillboards(_id);
+  }
 }

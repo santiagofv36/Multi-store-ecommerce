@@ -10,6 +10,7 @@ import {
   TFilterBillboardsInput,
 } from '@packages/models';
 import { parseObjectId } from 'src/lib/parse-object-id';
+import { Types } from 'mongoose';
 
 @CustomController({
   route: 'billboard',
@@ -32,7 +33,10 @@ export class BillboardController {
     operation: 'read',
   })
   async find(@Query() data: TFilterBillboardsInput) {
-    return this.billboardService.find(parseObjectId(data!));
+    return this.billboardService.find({
+      ...data,
+      store: new Types.ObjectId(data?.store),
+    });
   }
 
   @Base('GET', {
@@ -44,7 +48,7 @@ export class BillboardController {
     return this.billboardService.findOne({ _id });
   }
 
-  @Base('PUT', {
+  @Base('PATCH', {
     operation: 'update',
     zodSchema: filterBillboardInput,
   })

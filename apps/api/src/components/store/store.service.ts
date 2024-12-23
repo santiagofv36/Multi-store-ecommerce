@@ -91,4 +91,9 @@ export class StoreService {
       { new: true },
     );
   }
+
+  async getBillboards(_id: string) {
+    const store = await this.findOne({ _id });
+    return store?.billboards;
+  }
 }

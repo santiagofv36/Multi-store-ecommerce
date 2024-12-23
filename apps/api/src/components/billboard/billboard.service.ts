@@ -59,13 +59,10 @@ export class BillboardService
   }
 
   async createBillboard(data: TCreateBillboardInput): Promise<IBillboard> {
-    const store = await this.storeService.findOne({ _id: data?.storeId });
-
+    const store = await this.storeService.findOne({ _id: data?.store });
     if (!store) {
       throw new Error('Store not found');
     }
-
-    delete data.storeId;
 
     const billboardIds = store.billboards?.map((b) => b._id!) || [];
 
