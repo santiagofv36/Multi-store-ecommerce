@@ -33,13 +33,13 @@ export function ApiList({
       />
       <ApiAlert
         title="GET"
-        variant="public"
+        variant="admin"
         description={constructUrl(baseUrl, entityName, '', '', queryParam)}
       />
       <ApiAlert
         title="GET"
         description={constructUrl(baseUrl, entityName, params._id ?? '')}
-        variant="public"
+        variant="admin"
       />
       <ApiAlert
         title="POST"
