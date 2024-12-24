@@ -1,15 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from '../user/schema/user.model';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserService } from '../user/user.service';
 import { JwtStrategy } from './jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { RoleService } from '../role/role.service';
-import { RoleSchema } from '../role/schema/role.model';
+import { createMongooseFeature } from 'src/core/mongoose-utils';
+import { AuthSchemas } from './schema';
 
 @Module({
   imports: [
@@ -24,8 +23,7 @@ import { RoleSchema } from '../role/schema/role.model';
       }),
       imports: [ConfigModule],
     }),
-    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
-    MongooseModule.forFeature([{ name: 'Role', schema: RoleSchema }]),
+    createMongooseFeature(AuthSchemas),
   ],
   controllers: [AuthController],
   providers: [AuthService, UserService, JwtStrategy, RoleService],

@@ -7,12 +7,12 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '../ui/card';
-import { Input } from '../ui/input';
+} from '../../ui/card';
+import { Input } from '../../ui/input';
 import { Eye, EyeOff } from 'lucide-react';
-import { Button } from '../ui/button';
-import { Label } from '../ui/label';
-import { Separator } from '../ui/separator';
+import { Button } from '../../ui/button';
+import { Label } from '../../ui/label';
+import { Separator } from '../../ui/separator';
 
 interface SignInFormContentProps {
   disabled: boolean;
@@ -35,18 +35,14 @@ export function SigInFormContent({ disabled }: SignInFormContentProps) {
         <CardDescription className="text-black/70">
           Welcome back! Sign in to continue
         </CardDescription>
-        <Separator  />
+        <Separator />
       </CardHeader>
       <CardContent className="flex flex-col space-y-2">
         <Label className="text-black/70 text-sm font-semibold">
           Email address
         </Label>
         <div className="flex items-center gap-4">
-          <Input
-            type="email"
-            disabled={disabled}
-            {...register('email')}
-          />
+          <Input type="email" disabled={disabled} {...register('email')} />
           {errors?.email ? (
             <span className="text-red-500">{errors.email.message}</span>
           ) : null}
@@ -75,9 +71,7 @@ export function SigInFormContent({ disabled }: SignInFormContentProps) {
             <span className="text-red-500">{errors.password.message}</span>
           ) : null}
         </div>
-        <Button disabled={!isValid || disabled}>
-          Sign In
-        </Button>
+        <Button disabled={!isValid || disabled}>Sign In</Button>
       </CardContent>
       {/* <CardFooter className="w-full justify-center"></CardFooter> */}
       {/* Add sign un btn */}

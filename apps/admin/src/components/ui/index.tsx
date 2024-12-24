@@ -21,3 +21,5 @@ export * from './use-toast';
 export * from './popover';
 export * from './command';
 export * from './badge';
+export * from './data-table';
+export * from './dropdown-menu'

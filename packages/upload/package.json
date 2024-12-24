@@ -1,0 +1,30 @@
+{
+  "name": "@packages/upload",
+  "version": "0.0.0",
+  "description": "Upload service",
+  "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "build": "tsup src/index.ts",
+    "dev": "tsup src/index.ts --format cjs --watch --dts"
+  },
+  "files": [
+    "dist/**"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "none"
+  },
+  "main": "./dist/index.js",
+  "module": "./src/index.mjs",
+  "types": "./src/index.d.ts",
+  "keywords": [],
+  "author": "Santiago Figueroa",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.14.11",
+    "tsup": "^8.2.0",
+    "typescript": "^5.5.3",
+    "uploadthing": "^7.0.2"
+  }
+}

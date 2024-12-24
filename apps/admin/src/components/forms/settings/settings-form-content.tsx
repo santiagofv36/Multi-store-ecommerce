@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import { Button, Input, Label } from '../ui';
+import { Button, Input, Label } from '../../ui';
 import { TUpdateStoreInput } from '@packages/models';
 
 export function SettingsFormContent() {

@@ -1,6 +1,5 @@
-import { Body, Controller, Get, Post, UsePipes } from '@nestjs/common';
+import { Body } from '@nestjs/common';
 import { UserService } from './user.service';
-import { ZodValidationPipe } from '../../core/pipes';
 import {
   createUserInput,
   filterUserInput,
@@ -38,7 +37,7 @@ export class UserController {
     anonymous: true,
   })
   async update(@Body() data: TFilterUsersInput) {
-    return await this.userService.updateOne(
+    return this.userService.updateOne(
       {
         _id: data?._id,
       },

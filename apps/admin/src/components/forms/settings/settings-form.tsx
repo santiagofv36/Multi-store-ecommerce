@@ -4,16 +4,16 @@ import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { IStore, TUpdateStoreInput, updateStoreInput } from '@packages/models';
 import { FormProvider, useForm } from 'react-hook-form';
-import { SettingsFormContent } from '.';
-import { Heading } from '../shared';
-import { Button, Separator } from '../ui';
+import { SettingsFormContent } from '..';
+import { Heading } from '../../shared';
+import { Button, Separator } from '../../ui';
 import { TrashIcon } from 'lucide-react';
 import { useDeleteStore, useUpdateStore } from '@admin/services/store';
 import toast from 'react-hot-toast';
 import { useQueryClient } from '@tanstack/react-query';
-import { AlertModal } from '../modals';
+import { AlertModal } from '../../modals';
 import { useParams, useRouter } from 'next/navigation';
-import { ApiAlert } from '../shared/ApiAlert';
+import { ApiAlert } from '../../shared/ApiAlert';
 
 interface SettingsFormProps {
   initialData: IStore;
@@ -98,7 +98,7 @@ export function SettingsForm({ initialData }: SettingsFormProps) {
       <Separator />
       <ApiAlert
         title="NEXT_PUBLIC_API_URL"
-        description={`${process.env.NEXT_PUBLIC_API_URL}/stores/${params._id}`}
+        description={`${process.env.NEXT_PUBLIC_API_URL}/store/${params._id}`}
         variant="public"
       />
     </>

@@ -1,0 +1,2 @@
+#!/bin/sh
+npm run build || { echo "build failed, please fix the errors to be able to commit" ; exit 1; }

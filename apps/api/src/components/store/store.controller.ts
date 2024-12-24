@@ -25,7 +25,7 @@ export class StoreController {
   })
   async create(@Body() data: TCreateStoreInput, @Req() req: any) {
     const user = req.user;
-    return await this.storeService.createStore({
+    return this.storeService.createStore({
       ...data,
       user: user._id,
     });
@@ -53,7 +53,7 @@ export class StoreController {
     zodSchema: findOneStoreInput,
   })
   async findOne(@Param() _id: string) {
-    return await this.storeService.findOne({ _id });
+    return this.storeService.findOne({ _id });
   }
 
   @Base('PUT', {
@@ -61,7 +61,7 @@ export class StoreController {
     zodSchema: filterStoreInput,
   })
   async updateOne(@Body() data: TFilterStoreInput) {
-    return await this.storeService.updateOne(
+    return this.storeService.updateOne(
       {
         _id: data!._id,
       },
@@ -76,6 +76,14 @@ export class StoreController {
     zodSchema: findOneStoreInput,
   })
   async deleteOne(@Param() _id: string) {
-    return await this.storeService.deleteOne({ _id });
+    return this.storeService.deleteOne({ _id });
+  }
+
+  @Base('GET', {
+    operation: 'read',
+    route: ':_id/billboards',
+  })
+  async getBillboards(@Param() _id: string) {
+    return this.storeService.getBillboards(_id);
   }
 }
