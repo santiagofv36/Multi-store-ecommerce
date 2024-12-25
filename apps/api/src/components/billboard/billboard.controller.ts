@@ -1,5 +1,5 @@
-import { Base } from '../../core/decorators/global.decorator';
-import { CustomController } from 'src/core';
+import { Base } from '../../core';
+import { Controller } from 'src/core';
 import { Body, Param, Query } from '@nestjs/common';
 import { BillboardService } from './billboard.service';
 import {
@@ -9,10 +9,9 @@ import {
   TCreateBillboardInput,
   TFilterBillboardsInput,
 } from '@packages/models';
-import { parseObjectId } from 'src/lib/parse-object-id';
 import { Types } from 'mongoose';
 
-@CustomController({
+@Controller({
   route: 'billboard',
   document: 'billboard',
 })
