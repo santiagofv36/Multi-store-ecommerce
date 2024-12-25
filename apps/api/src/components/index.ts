@@ -4,6 +4,7 @@ import { UserModule } from './user';
 import { StoreModule } from './store';
 import { RoleModule } from './role';
 import { BillboardModule } from './billboard';
+import { CategoryModule } from './category/category.module';
 
 export const moduleComponents = [
   AddressModule,
@@ -12,4 +13,5 @@ export const moduleComponents = [
   StoreModule,
   RoleModule,
   BillboardModule,
+  CategoryModule,
 ];
