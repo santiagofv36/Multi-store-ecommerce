@@ -6,6 +6,7 @@ import { moduleComponents } from './components';
 import { CustomLoggerService } from './core';
 import { HttpAdapterHost } from '@nestjs/core';
 import { app } from './core';
+import { SyncService } from './lib/sync.service';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -13,7 +14,7 @@ import { app } from './core';
     MongooseModule.forRoot(process.env.DB_URI!),
     ...moduleComponents,
   ],
-  providers: [CustomLoggerService],
+  providers: [CustomLoggerService, SyncService],
   exports: [CustomLoggerService],
   controllers: [],
 })
