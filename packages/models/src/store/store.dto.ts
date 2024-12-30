@@ -3,6 +3,7 @@ import { userDefinition } from '../user';
 import { basicModelDefinition, objectIdString } from '../basicDefinitions';
 import { billboardDefinition } from '../billboard';
 import { categoryDefinition } from '../category';
+import { sizeDefinition } from '../size';
 
 export const storeDefinition = basicModelDefinition.extend({
   name: z
@@ -15,6 +16,7 @@ export const storeDefinition = basicModelDefinition.extend({
   categories: z
     .union([z.array(objectIdString), z.array(categoryDefinition)])
     .optional(),
+  sizes: z.union([z.array(objectIdString), z.array(sizeDefinition)]).optional(),
 });
 
 // create store
