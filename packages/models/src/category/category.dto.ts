@@ -1,11 +1,10 @@
 import { basicModelDefinition, objectIdString } from '../basicDefinitions';
 import { billboardDefinition } from '../billboard';
-import { storeDefinition } from '../store';
 import { z } from 'zod';
 
 export const categoryDefinition = basicModelDefinition.extend({
-  store: z.union([objectIdString, storeDefinition]),
-  billboard: z.union([objectIdString, billboardDefinition]),
+  store: objectIdString.optional(),
+  billboard: z.union([objectIdString, billboardDefinition, z.string()]),
   name: z.string(),
 });
 
@@ -32,6 +31,7 @@ export type TFindOneCategoryInput = z.infer<typeof findOneCategoryInput>;
 export const updateCategoryInput = categoryDefinition.pick({
   name: true,
   _id: true,
+  billboard: true,
 });
 
 export type TUpdateCategoryInput = z.infer<typeof updateCategoryInput>;

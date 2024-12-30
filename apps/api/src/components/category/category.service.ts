@@ -28,11 +28,18 @@ export class CategoryService
     projection?: ProjectionType<ICategory> | null,
     options?: QueryOptions<ICategory> | null,
   ): Promise<ICategory | null> {
-    return this.Category.findOne(
-      { ...filter, active: true },
+    const data = await this.Category.findOne(
+      {
+        ...filter,
+        active: true,
+      },
       projection,
       options,
-    );
+    ).populate('billboard');
+    if (!data) {
+      throw new Error('Category not found');
+    }
+    return data;
   }
 
   async find(
@@ -40,7 +47,11 @@ export class CategoryService
     projection?: ProjectionType<ICategory> | null,
     options?: QueryOptions<ICategory> | null,
   ): Promise<ICategory[]> {
-    return this.Category.find({ ...filter, active: true }, projection, options);
+    return this.Category.find(
+      { ...filter, active: true },
+      projection,
+      options,
+    ).populate('billboard');
   }
 
   async paginate(
@@ -73,7 +84,21 @@ export class CategoryService
     if (!billboard) {
       throw new Error('Billboard not found');
     }
-    return this.Category.create(data);
+
+    const categoryIds = store.categories?.map((c) => c._id!) || [];
+
+    const category = await this.Category.create(data);
+
+    await this.storeService.updateOne(
+      {
+        _id: store._id,
+      },
+      {
+        categories: [...categoryIds, category._id!],
+      },
+    );
+
+    return category;
   }
 
   async findCategoriesByStore(storeId: string) {
@@ -82,5 +107,11 @@ export class CategoryService
 
   async findCategoriesByBillboard(billboardId: string) {
     return this.Category.find({ billboard: billboardId });
+  }
+
+  async deleteOne(filter: FilterQuery<ICategory>): Promise<ICategory | null> {
+    return this.Category.findOneAndUpdate(filter, {
+      active: false,
+    });
   }
 }

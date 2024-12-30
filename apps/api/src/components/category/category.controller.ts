@@ -1,15 +1,13 @@
 import { Base } from '../../core';
 import { Controller } from '../../core';
 import {
-  createCategoryInput,
   filterCategoryInput,
   findOneCategoryInput,
   TCreateCategoryInput,
   TFilterCategoryInput,
 } from '@packages/models';
-import { Types } from 'mongoose';
 import { CategoryService } from './category.service';
-import { Body, Query } from '@nestjs/common';
+import { BadRequestException, Body, Param, Query } from '@nestjs/common';
 import { parseObjectId } from 'src/lib/parse-object-id';
 
 @Controller({
@@ -34,5 +32,41 @@ export class CategoryController {
   })
   async find(@Query() data: TFilterCategoryInput) {
     return this.categoryService.find(parseObjectId(data!));
+  }
+
+  @Base('GET', {
+    route: ':_id',
+    zodSchema: findOneCategoryInput,
+    operation: 'read',
+  })
+  async findOne(@Param() data: { _id: string }) {
+    try {
+      const category = await this.categoryService.findOne(data);
+      return category;
+    } catch (error) {
+      return new BadRequestException('Category not found');
+    }
+  }
+
+  @Base('PATCH', {
+    operation: 'update',
+    zodSchema: filterCategoryInput,
+  })
+  async update(@Body() data: TFilterCategoryInput) {
+    return this.categoryService.updateOne(
+      {
+        _id: data!._id,
+      },
+      data!,
+      { new: true },
+    );
+  }
+
+  @Base('DELETE', {
+    route: ':_id',
+    operation: 'delete',
+  })
+  async delete(@Param() data: { _id: string }) {
+    return this.categoryService.deleteOne(data);
   }
 }
