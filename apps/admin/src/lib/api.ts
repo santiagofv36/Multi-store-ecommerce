@@ -78,6 +78,20 @@ export const api = {
       },
     }),
 
+  patch: async <DataType>({
+    url,
+    schema = z.any() as z.ZodType<DataType>,
+    options = {},
+  }: TFetchInput<DataType>) =>
+    fetchWrapper({
+      url,
+      schema,
+      options: {
+        ...options,
+        method: 'PATCH',
+      },
+    }),
+
   put: async <DataType>({
     url,
     schema = z.any() as z.ZodType<DataType>,

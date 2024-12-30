@@ -4,7 +4,7 @@ import { Button } from '../ui';
 import { cn } from '@admin/lib/utils';
 import { signOut } from 'next-auth/react';
 import { UserAvatar } from './UserAvatar';
-import { IUser } from '@packages/models/src';
+import { IUser } from '@packages/models';
 import { LogOut } from 'lucide-react';
 import useOutsideClick from '@admin/hooks/use-outside-click';
 interface UserButtonProps {

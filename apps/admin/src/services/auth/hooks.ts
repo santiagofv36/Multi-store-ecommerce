@@ -1,5 +1,5 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { IUser } from 'packages/models/src';
+import { IUser } from '@packages/models';
 import { currentUser } from './queries';
 
 export function useCurrentUser(

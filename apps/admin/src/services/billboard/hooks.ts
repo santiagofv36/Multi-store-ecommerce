@@ -1,6 +1,7 @@
 import { useMutation, useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { getBillboard } from './queries';
+import { getBillboard, getBillboards } from './queries';
 import { createBillboard, deleteBillboard, updateBillboard } from '.';
+import { TFilterBillboardsInput } from '@packages/models';
 
 export function useBillboard(
   params: { _id: string },
@@ -31,5 +32,16 @@ export function useDeleteBillboard() {
   return useMutation({
     mutationKey: ['deleteBillboard'],
     mutationFn: deleteBillboard,
+  });
+}
+
+export function useBillboards(
+  params: TFilterBillboardsInput,
+  options?: UseQueryOptions<any, any, any, any>
+) {
+  return useQuery({
+    queryKey: ['getBillboards', params],
+    queryFn: () => getBillboards(params),
+    ...options,
   });
 }
