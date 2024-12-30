@@ -23,7 +23,7 @@ export class SyncService implements OnApplicationBootstrap {
 
     const adminRole = await this.roleService.findOne({ name: 'superadmin' });
 
-    const roleDocuments = adminRole?.documents || [];
+    let roleDocuments = adminRole?.documents || [];
 
     const filteredOutComponents = components.filter((component) => {
       // filter out address and auth components
@@ -41,7 +41,7 @@ export class SyncService implements OnApplicationBootstrap {
 
       if (!found) {
         // If not, add it
-        adminRole.documents = [
+        roleDocuments = [
           ...roleDocuments,
           { name: component, permissions: ['all'] },
         ];
