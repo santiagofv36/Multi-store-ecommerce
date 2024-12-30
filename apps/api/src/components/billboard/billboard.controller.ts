@@ -1,5 +1,5 @@
 import { Base } from '../../core';
-import { Controller } from 'src/core';
+import { Controller } from '../../core';
 import { Body, Param, Query } from '@nestjs/common';
 import { BillboardService } from './billboard.service';
 import {

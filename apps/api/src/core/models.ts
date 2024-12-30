@@ -10,6 +10,7 @@ import {
   Category,
   CategorySchema,
 } from '../components/category/schema/category.model';
+import { Size, SizeSchema } from '../components/size/schema/size.model';
 
 export type MongooseModels = {
   name: string;
@@ -22,4 +23,5 @@ export const models: MongooseModels = [
   { name: Store.name, schema: StoreSchema },
   { name: Billboard.name, schema: BillboardSchema },
   { name: Category.name, schema: CategorySchema },
+  { name: Size.name, schema: SizeSchema },
 ];
