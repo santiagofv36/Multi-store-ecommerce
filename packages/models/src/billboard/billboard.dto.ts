@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import { basicModelDefinition, objectIdString } from '../basicDefinitions';
-import { storeDefinition } from '../store';
 
 export const billboardDefinition = basicModelDefinition.extend({
   label: z.string().min(1, { message: 'Label is required' }),

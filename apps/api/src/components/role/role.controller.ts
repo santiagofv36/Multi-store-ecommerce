@@ -1,10 +1,10 @@
-import { Body, Controller } from '@nestjs/common';
+import { Body } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { Base } from '../../core/decorators/global.decorator';
 import { createRoleInput, TCreateRoleInput } from '@packages/models';
-import { CustomController } from 'src/core';
+import { Controller } from 'src/core';
 
-@CustomController({
+@Controller({
   route: 'role',
   document: 'role',
 })

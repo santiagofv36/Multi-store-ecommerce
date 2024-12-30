@@ -1,4 +1,4 @@
-import { applyDecorators, Controller } from '@nestjs/common';
+import { applyDecorators, Controller as Contr } from '@nestjs/common';
 import { Document } from './document.decorator';
 
 interface CustomDecoratorOptions {
@@ -6,8 +6,8 @@ interface CustomDecoratorOptions {
   document: string;
 }
 
-export function CustomController(options: CustomDecoratorOptions) {
+export function Controller(options: CustomDecoratorOptions) {
   const { route, document } = options;
 
-  return applyDecorators(Controller(route), Document(document));
+  return applyDecorators(Contr(route), Document(document));
 }

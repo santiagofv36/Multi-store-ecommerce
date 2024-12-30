@@ -1,9 +1,9 @@
-import { Body, Controller, Req } from '@nestjs/common';
+import { Body, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { TLoginInput, loginInput } from '@packages/models';
-import { Base, CustomController } from '../../core';
+import { Base, Controller } from '../../core';
 
-@CustomController({
+@Controller({
   route: 'auth',
   document: 'user',
 })

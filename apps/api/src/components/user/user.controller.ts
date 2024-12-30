@@ -7,9 +7,9 @@ import {
   TFilterUsersInput,
 } from '@packages/models';
 import { Base } from '../../core/decorators/global.decorator';
-import { CustomController } from 'src/core';
+import { Controller } from 'src/core';
 
-@CustomController({
+@Controller({
   route: 'user',
   document: 'user',
 })

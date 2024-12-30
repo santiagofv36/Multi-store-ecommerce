@@ -1,4 +1,4 @@
-import { TCreatePasswordSchemaForm } from 'packages/models/src';
+import { TCreatePasswordSchemaForm } from '@packages/models';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import {

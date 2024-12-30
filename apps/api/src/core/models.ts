@@ -6,6 +6,10 @@ import {
   BillboardSchema,
 } from '../components/billboard/schema/billboard.model';
 import mongoose from 'mongoose';
+import {
+  Category,
+  CategorySchema,
+} from '../components/category/schema/category.model';
 
 export type MongooseModels = {
   name: string;
@@ -17,4 +21,5 @@ export const models: MongooseModels = [
   { name: Role.name, schema: RoleSchema },
   { name: Store.name, schema: StoreSchema },
   { name: Billboard.name, schema: BillboardSchema },
+  { name: Category.name, schema: CategorySchema },
 ];

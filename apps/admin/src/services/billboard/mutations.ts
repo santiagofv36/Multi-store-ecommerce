@@ -4,7 +4,7 @@ import {
   TCreateBillboardInput,
   TFilterBillboardsInput,
   TFindOneBillboardInput,
-} from 'packages/models/src';
+} from '@packages/models';
 
 export async function createBillboard(input: TCreateBillboardInput) {
   const { data } = await api.post<IBillboard>({

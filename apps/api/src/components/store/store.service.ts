@@ -59,6 +59,10 @@ export class StoreService {
       {
         path: 'billboards',
       },
+      {
+        path: 'categories',
+        populate: 'billboard',
+      },
     ]);
   }
 

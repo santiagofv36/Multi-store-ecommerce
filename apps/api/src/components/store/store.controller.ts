@@ -8,10 +8,10 @@ import {
   TFilterStoreInput,
 } from '@packages/models';
 import { Base } from '../../core/decorators/global.decorator';
-import { CustomController } from '../../core';
+import { Controller } from '../../core';
 import { parseObjectId } from 'src/lib/parse-object-id';
 
-@CustomController({
+@Controller({
   route: 'store',
   document: 'store',
 })

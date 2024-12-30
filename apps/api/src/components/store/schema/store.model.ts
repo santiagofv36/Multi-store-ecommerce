@@ -14,6 +14,8 @@ export class Store extends zodToClass(createStoreInput) {
   user: Types.ObjectId;
   @Prop({ type: [Types.ObjectId], ref: 'Billboard' })
   billboards: Types.ObjectId[];
+  @Prop({ type: [Types.ObjectId], ref: 'Category' })
+  categories: Types.ObjectId[];
 }
 
 export const StoreSchema = SchemaFactory.createForClass(Store);

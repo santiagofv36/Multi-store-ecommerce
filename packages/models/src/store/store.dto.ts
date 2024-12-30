@@ -1,7 +1,8 @@
+import { z } from 'zod';
 import { userDefinition } from '../user';
 import { basicModelDefinition, objectIdString } from '../basicDefinitions';
-import { z } from 'zod';
 import { billboardDefinition } from '../billboard';
+import { categoryDefinition } from '../category';
 
 export const storeDefinition = basicModelDefinition.extend({
   name: z
@@ -10,6 +11,9 @@ export const storeDefinition = basicModelDefinition.extend({
   user: z.union([objectIdString, userDefinition]).optional(),
   billboards: z
     .union([z.array(objectIdString), z.array(billboardDefinition)])
+    .optional(),
+  categories: z
+    .union([z.array(objectIdString), z.array(categoryDefinition)])
     .optional(),
 });
 

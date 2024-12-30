@@ -10,6 +10,8 @@ export const entityRoutes = [
   'billboard',
   'user',
   'billboards',
+  'categories',
+  'category',
 ] as const;
 
 export type EntityRoute = (typeof entityRoutes)[number];
@@ -21,10 +23,5 @@ export function constructUrl(
   prefix: string = '',
   queryParam: string = ''
 ) {
-  switch (entity) {
-    case 'billboard':
-      return `${baseUrl}${prefix ? `/${prefix}/${id}` : `/${entity}/${id}`}${queryParam ? `?${queryParam}` : ''}`;
-    default:
-      return '';
-  }
+  return `${baseUrl}${prefix ? `/${prefix}/${id}` : `/${entity}/${id}`}${queryParam ? `?${queryParam}` : ''}`;
 }

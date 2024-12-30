@@ -23,6 +23,11 @@ export function MainNav({
       active: pathname === `/dashboard/${params._id}/billboards`,
     },
     {
+      href: `/dashboard/${params._id}/categories`,
+      label: 'Categories',
+      active: pathname === `/dashboard/${params._id}/categories`,
+    },
+    {
       href: `/dashboard/${params._id}/settings`,
       label: 'Settings',
       active: pathname === `/dashboard/${params._id}/settings`,

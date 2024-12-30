@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, :root {
+html,
+body,
+:root {
   height: 100%;
 }
 
@@ -24,6 +26,10 @@ html, body, :root {
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
+    --success:  134 92% 87%;
+    --success-foreground: 135 52% 31%;
+    --danger: 359 100% 84%;
+    --danger-foreground: 359 70% 43%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
