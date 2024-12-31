@@ -4,7 +4,7 @@ import { UserModule } from './user';
 import { StoreModule } from './store';
 import { RoleModule } from './role';
 import { BillboardModule } from './billboard';
-import { CategoryModule } from './category/category.module';
+import { CategoryModule } from './category';
 import { SizeModule } from './size';
 
 export const moduleComponents = [
