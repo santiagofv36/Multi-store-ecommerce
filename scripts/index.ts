@@ -345,6 +345,7 @@ function generateApiComponent(_componentName: string) {
   import { ${capitalized}Service } from './${componentName}.service';
   import { Body, Param, Query } from '@nestjs/common';
   import { Types } from 'mongoose';
+  import { parseObjectId } from 'src/lib/parse-object-id';
   
   @Controller({
     route: '${componentName}',
@@ -368,7 +369,7 @@ function generateApiComponent(_componentName: string) {
       operation: 'read',
     })
     async find(@Query() data: TFilter${capitalized}Input) {
-      return this.${componentName}Service.find(data);
+      return this.${componentName}Service.find(parseObjectId(data ?? {}));
     }
 
     @Base('GET', {
