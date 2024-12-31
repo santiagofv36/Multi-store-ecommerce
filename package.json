@@ -8,15 +8,19 @@
     "lint": "pnpm --parallel lint",
     "start": "pnpm --parallel start",
     "packages:build": "pnpm --parallel packages:build",
-    "prepare": "husky"
+    "prepare": "husky",
+    "generate": "ts-node ./scripts/index.ts"
   },
   "devDependencies": {
-    "husky": "^9.1.5"
+    "@types/node": "^22.10.2",
+    "execa": "^9.5.2",
+    "husky": "^9.1.5",
+    "ts-node": "^10.9.1"
   },
   "keywords": [],
   "author": "Santiago Figueroa",
   "license": "MIT",
-  "workspaces":[
+  "workspaces": [
     "apps/*",
     "packages/*"
   ]
