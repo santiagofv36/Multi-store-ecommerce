@@ -266,7 +266,7 @@ function generateApiComponent(_componentName: string) {
   const serviceContent = `import { Injectable } from '@nestjs/common';
   import { InjectModel } from '@nestjs/mongoose';
   import { 
-    I${capitalized}
+    I${capitalized},
     Pagination,
     TCreate${capitalized}Input,
     TFilter${capitalized}Input,
@@ -335,10 +335,10 @@ function generateApiComponent(_componentName: string) {
   );
 
   const controllerContent = `import { 
-  create${capitalized}Input
-  filter${capitalized}Input
-  findOne${capitalized}Input
-  TCreate${capitalized}Input
+  create${capitalized}Input,
+  filter${capitalized}Input,
+  findOne${capitalized}Input,
+  TCreate${capitalized}Input,
   TFilter${capitalized}Input
   } from '@packages/models';
   import { Base, Controller } from '../../core';
