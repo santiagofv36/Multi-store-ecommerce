@@ -18,7 +18,7 @@ export const roleDefinition = basicModelDefinition.extend({
     z.object({
       name: z.string(),
       permissions: z.array(z.enum(permissions)),
-    })
+    }),
   ),
 });
 

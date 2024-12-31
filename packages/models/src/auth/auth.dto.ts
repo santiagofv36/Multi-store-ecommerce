@@ -17,13 +17,13 @@ export const createPasswordSchema = AuthSchema.extend({
   .refine(
     ({ password }) =>
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
-        password
+        password,
       ),
     {
       message:
         'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character',
       path: ['password'],
-    }
+    },
   )
   .refine(
     ({ password, confirmPassword }) => {
@@ -32,7 +32,7 @@ export const createPasswordSchema = AuthSchema.extend({
     {
       message: 'Passwords do not match',
       path: ['confirmPassword'],
-    }
+    },
   );
 
 export type TCreatePasswordSchemaForm = z.infer<typeof createPasswordSchema>;

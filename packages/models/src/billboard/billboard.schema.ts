@@ -22,5 +22,5 @@ export const billboardSchema = new Schema<IBillboard>(
       default: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );

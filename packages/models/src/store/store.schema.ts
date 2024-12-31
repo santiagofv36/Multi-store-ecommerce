@@ -17,5 +17,5 @@ export const storeSchema = new Schema<IStore>(
     },
     categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
   },
-  { timestamps: true }
+  { timestamps: true },
 );

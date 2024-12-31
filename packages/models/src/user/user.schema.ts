@@ -24,5 +24,5 @@ export const userSchema = new Schema<IUser>(
       default: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );

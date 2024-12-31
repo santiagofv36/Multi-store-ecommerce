@@ -29,5 +29,5 @@ export const categorySchema = new Schema<ICategory>(
       required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );

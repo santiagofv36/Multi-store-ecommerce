@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint .",
     "build": "tsup src/index.ts",
-    "dev": "tsup src/index.ts --format cjs --watch --dts"
+    "dev": "tsup src/index.ts --format cjs --watch --dts",
+    "format": "prettier --write ."
   },
   "files": [
     "dist/**"

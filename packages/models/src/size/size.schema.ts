@@ -22,5 +22,5 @@ export const sizeSchema = new Schema<ISize>(
       required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );

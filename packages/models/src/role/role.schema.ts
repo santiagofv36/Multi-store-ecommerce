@@ -32,5 +32,5 @@ export const roleSchema = new Schema<IRole>(
       },
     ],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
