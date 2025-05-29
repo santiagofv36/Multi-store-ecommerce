@@ -1,6 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { execa } from 'execa';
+import { Template } from './template';
+import { FileWritterService } from './file-writter';
 
 async function runPrettier(app: 'api' | 'models') {
   try {
@@ -484,17 +486,23 @@ function writeInExistingFile({
 
 // Get the component name from CLI arguments
 const args = process.argv.slice(2);
-console.log(process.argv);
 if (args.length === 0) {
   console.error('Error: Please provide a component name.');
   process.exit(1);
 }
 
-const componentName = args[0];
+const componentName = args[0]?.toLocaleLowerCase();
+
+const template = new Template(
+  componentName,
+  new FileWritterService()
+);
+const filled = template.fillAllTemplates();
+console.log(filled);
 
 // First, generate the packages folder and files
-generatePackageComponent(componentName);
-runPrettier('models');
-// Next, generate the Api folder and files
-generateApiComponent(componentName);
-runPrettier('api');
+// generatePackageComponent(componentName);
+// runPrettier('models');
+// // Next, generate the Api folder and files
+// generateApiComponent(componentName);
+// runPrettier('api');
